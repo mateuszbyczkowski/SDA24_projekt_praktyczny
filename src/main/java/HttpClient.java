@@ -7,29 +7,25 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class AdviseClient {
-    public Slip fetchRandomAdvise() {
+public class HttpClient {
+    public <T> T fetch(String uri, Class<T> clazz) {
         try {
-            URL url = new URL("https://api.adviceslip.com/advice");
+            URL url = new URL(uri);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String inputLine;
-            StringBuffer content = new StringBuffer();
+            StringBuilder content = new StringBuilder();
             while ((inputLine = in.readLine()) != null) {
                 content.append(inputLine);
             }
             in.close();
 
             Gson gson = new Gson();
-            SlipResponse slip = gson.fromJson(content.toString(), SlipResponse.class);
+            T object = gson.fromJson(content.toString(), clazz);
 
-            return slip.getSlip();
-        } catch (
-                MalformedURLException e) {
-            e.printStackTrace();
-        } catch (
-                IOException e) {
+            return object;
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;

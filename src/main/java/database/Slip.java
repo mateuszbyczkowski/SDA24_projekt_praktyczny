@@ -16,6 +16,7 @@ public class Slip {
     private long id;
     private String advice;
 
+    public Slip(){}
     public Slip(SlipDTo slipDTo){
         this.id = slipDTo.getId();
         this.advice = slipDTo.getAdvice();
@@ -42,5 +43,12 @@ public class Slip {
         this.advice = advice;
     }
 
-
+    @Override
+    public String toString() {
+        return "Slip{" +
+                "slipId=" + slipId +
+                ", id=" + id +
+                ", advice='" + advice + '\'' +
+                '}';
+    }
 }

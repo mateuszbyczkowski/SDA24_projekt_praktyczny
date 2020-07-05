@@ -1,6 +1,8 @@
 import database.Slip;
 import http.SlipDTo;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -44,8 +46,6 @@ public class Menu {
                     System.out.println("******Cytat dla Ciebie******");
                     System.out.println(advice);
                     System.out.println("***********************");
-
-
                     break;
                 }
                 case 2: {
@@ -53,7 +53,8 @@ public class Menu {
                     break;
                 }
                 case 3:   {
-                    System.out.println("W toku");
+                    List<Slip> allAdvice = adviceService.getAllAdvice();
+                    System.out.println(Arrays.toString(allAdvice.toArray()));
                     break;
                 }
                 case -1:{

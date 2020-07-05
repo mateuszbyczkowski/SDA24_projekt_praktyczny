@@ -1,7 +1,10 @@
 import database.Slip;
+import database.SlipDao;
 import http.SlipDTo;
 import http.SlipResponse;
 import http.HttpClient;
+
+import java.util.List;
 
 public class AdviceService {
     private  static final String URL = "https://api.adviceslip.com/";
@@ -13,5 +16,13 @@ public class AdviceService {
 
     public void saveAdvise(SlipDTo slip){
         Slip slipToSave = new Slip(slip);
+        SlipDao slipDao = new SlipDao();
+        slipDao.insertOrUpdate(slipToSave);
+    }
+
+    public List<Slip> getAllAdvice(){
+        SlipDao slipDao = new SlipDao();
+        List<Slip> slips = slipDao.getAll();
+        return slips;
     }
 }

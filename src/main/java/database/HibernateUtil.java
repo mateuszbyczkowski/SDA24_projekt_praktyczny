@@ -26,3 +26,5 @@ public class HibernateUtil {
     }
 }
 
+//przyklad zmian
+

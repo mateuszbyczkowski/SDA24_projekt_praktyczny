@@ -25,4 +25,9 @@ public class AdviceService {
         List<Slip> slips = slipDao.getAll();
         return slips;
     }
+
+    public void deleteAdvise(long id){
+
+    }
+
 }

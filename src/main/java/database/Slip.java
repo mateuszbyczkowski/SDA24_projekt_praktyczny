@@ -49,6 +49,6 @@ public class Slip {
                 "slipId=" + slipId +
                 ", id=" + id +
                 ", advice='" + advice + '\'' +
-                '}';
+                '}' + "\n";
     }
 }

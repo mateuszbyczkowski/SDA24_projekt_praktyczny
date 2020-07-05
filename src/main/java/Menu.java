@@ -25,8 +25,6 @@ public class Menu {
             System.out.println("2) Wyszukaj cytat");
             System.out.println("3) Moje cytaty");
             System.out.println("0) Zakończ"); //eksport cytatów, wyświetlanie, usuwanie
-            //małe menu
-            //2. zapisz aktualnt cytat do
 
             int nextInt = -1;
             Scanner scanner = new Scanner(System.in);

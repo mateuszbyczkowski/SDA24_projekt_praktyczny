@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class HttpClient {
+public class HttpClient  {
     public <T> T fetch(String uri, Class<T> clazz) {
         try {
             URL url = new URL(uri);

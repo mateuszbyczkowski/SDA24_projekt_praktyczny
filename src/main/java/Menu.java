@@ -37,7 +37,7 @@ public class Menu {
                 case 1: {
                     System.out.println("******Cytat dla Ciebie******");
                     System.out.println(adviceService.getRandomAdvice().getAdvice());
-                    System.out.println("************");
+                    System.out.println("***********************");
                     break;
                 }
                 case 2: {

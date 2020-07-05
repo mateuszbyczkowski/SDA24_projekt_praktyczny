@@ -25,7 +25,8 @@ public class Menu {
             System.out.println("2) Wyszukaj cytat");
             System.out.println("3) Moje cytaty");
             System.out.println("0) Zakończ"); //eksport cytatów, wyświetlanie, usuwanie
-
+            //małe menu
+            //2. zapisz aktualnt cytat do
 
             int nextInt = -1;
             Scanner scanner = new Scanner(System.in);
@@ -42,10 +43,11 @@ public class Menu {
                 case 1: {
                     SlipDTo randomAdvice = adviceService.getRandomAdvice();
                     String advice = randomAdvice.getAdvice();
-                    adviceService.saveAdvise(randomAdvice);
                     System.out.println("******Cytat dla Ciebie******");
                     System.out.println(advice);
                     System.out.println("***********************");
+
+                    MenuCase1(randomAdvice);
                     break;
                 }
                 case 2: {
@@ -55,6 +57,47 @@ public class Menu {
                 case 3:   {
                     List<Slip> allAdvice = adviceService.getAllAdvice();
                     System.out.println(Arrays.toString(allAdvice.toArray()));
+                    break;
+                }
+                case -1:{
+                    System.out.println("Wpisz liczbę");
+                    break;
+                }
+                default:{
+                    System.out.println("Wpisz inny numer.");
+                }
+            }
+        }
+    }
+
+    private static void MenuCase1(SlipDTo randomAdvice) {
+        boolean flaga = true;
+        while (flaga){
+            System.out.println("wbierz jedną z opcji:");
+            System.out.println("1) Losuj następny cytat.");
+            System.out.println("2) Dodaj do ulubionych");
+            System.out.println("3) Cofnij do menu głównego");
+            int nextInt = -1;
+            Scanner scanner = new Scanner(System.in);
+            if(scanner.hasNextInt()){
+                nextInt = scanner.nextInt();
+            }
+            switch (nextInt){
+
+                case 1:{
+                    randomAdvice = adviceService.getRandomAdvice();
+                    String advice = randomAdvice.getAdvice();
+                    System.out.println("******Cytat dla Ciebie******");
+                    System.out.println(advice);
+                    System.out.println("***********************");
+                    break;
+                }
+                case 2:{
+                    adviceService.saveAdvise(randomAdvice);
+                    break;
+                }
+                case 3: {
+                    flaga = false;
                     break;
                 }
                 case -1:{

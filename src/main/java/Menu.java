@@ -1,4 +1,5 @@
 import database.Slip;
+import http.SlipDto;
 
 import java.util.Scanner;
 
@@ -37,9 +38,9 @@ public class Menu {
                     break;
                 }
                 case 1: {
-                    Slip randomAdvice = adviceService.getRandomAdvice();
+                    SlipDto randomAdvice = adviceService.getRandomAdvice();
                     String advice = randomAdvice.getAdvice();
-                    adviceService.saveAdvise(randomAdvice);
+                    adviceService.saveAdvice(randomAdvice);
                     System.out.println("******Cytat dla Ciebie******");
                     System.out.println(advice);
                     System.out.println("***********************");

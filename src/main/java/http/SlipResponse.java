@@ -1,3 +1,7 @@
+package http;
+
+import database.Slip;
+
 public class SlipResponse {
     private Slip slip;
 

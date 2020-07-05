@@ -1,3 +1,5 @@
+import database.Slip;
+
 import java.util.Scanner;
 
 
@@ -35,9 +37,14 @@ public class Menu {
                     break;
                 }
                 case 1: {
+                    Slip randomAdvice = adviceService.getRandomAdvice();
+                    String advice = randomAdvice.getAdvice();
+                    adviceService.saveAdvise(randomAdvice);
                     System.out.println("******Cytat dla Ciebie******");
-                    System.out.println(adviceService.getRandomAdvice().getAdvice());
+                    System.out.println(advice);
                     System.out.println("***********************");
+
+
                     break;
                 }
                 case 2: {

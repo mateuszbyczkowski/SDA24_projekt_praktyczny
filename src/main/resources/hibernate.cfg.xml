@@ -5,7 +5,7 @@
 <hibernate-configuration>
     <session-factory>
         <property name="connection.url">
-            jdbc:mysql://localhost:3306/advise_book?serverTimezone=Europe/Warsaw&amp;createDatabaseIfNotExist=true
+            jdbc:mysql://localhost:3306/Advise_Book_db?serverTimezone=Europe/Warsaw&amp;createDatabaseIfNotExist=true
         </property>
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="connection.username">root</property>
@@ -18,7 +18,7 @@
         <!--create-drop - uruchom connector, stwórz tabele i kolumny, a po zakończeniu aplikacji dropuj wszystkiego -->
         <!--validate - weryfikuje poprawność bazy -->
         <property name="hbm2ddl.auto">update</property>
-        <property name="show_sql">true</property>
+        <property name="show_sql">false</property>
 
         <!--Wspominamy wszystkie klasy którymi chcemy zarządzać w bazie danych-->
         <mapping class="database.Slip"/>

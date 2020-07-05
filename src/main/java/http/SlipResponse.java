@@ -3,17 +3,17 @@ package http;
 import database.Slip;
 
 public class SlipResponse {
-    private Slip slip;
+    private SlipDTo slip;
 
-    public SlipResponse(Slip slip) {
+    public SlipResponse(SlipDTo slip) {
         this.slip = slip;
     }
 
-    public Slip getSlip() {
+    public SlipDTo getSlip() {
         return slip;
     }
 
-    public void setSlip(Slip slip) {
+    public void setSlip(SlipDTo slip) {
         this.slip = slip;
     }
 }

@@ -69,17 +69,10 @@ public class SlipDao {
         return Optional.empty();
     }
 
-    // Mechanizm usuwania wykona następujące czynności:
-    // 1. podajemy id
-    // 2. szukamy obiektu o podanym id
-    //    a. jeśli znajdziemy to znaleziony obiekt usuwamy (możemy obiekt wysłać do metody delete) (przekazujemy do usunięcia)
-    //    b. jeśli nie znajdziemy, wypisujemy komunikat
+
     public boolean deleteStudent(Long id) {
-        // 1. podajemy id
-        // 2. szukamy obiektu o podanym id
         Optional<Slip> optionalStudent = findById(id);
         if (optionalStudent.isPresent()) {
-            //    a. jeśli znajdziemy to znaleziony obiekt usuwamy (możemy obiekt wysłać do metody delete)
             Slip student = optionalStudent.get();
 
             Transaction transaction = null;
@@ -97,7 +90,6 @@ public class SlipDao {
                 }
             }
         } else {
-            //    b. jeśli nie znajdziemy, wypisujemy komunikat
             System.err.println("Nie udało się odnaleźć studenta");
         }
         return false;

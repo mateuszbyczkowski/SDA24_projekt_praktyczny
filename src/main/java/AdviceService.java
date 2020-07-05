@@ -26,8 +26,6 @@ public class AdviceService {
         return slips;
     }
 
-    public void deleteAdvise(long id){
 
-    }
 
 }

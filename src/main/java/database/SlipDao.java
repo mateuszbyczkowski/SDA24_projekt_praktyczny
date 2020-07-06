@@ -52,7 +52,6 @@ public class SlipDao {
             CriteriaBuilder cb = session.getCriteriaBuilder();
             CriteriaQuery<Slip> query = cb.createQuery(Slip.class);
             Root<Slip> table = query.from(Slip.class);
-
             query.select(table).where(cb.equal(table.get("id"), id));
             Slip slip = session.createQuery(query).getSingleResult();
 
@@ -64,18 +63,17 @@ public class SlipDao {
         return Optional.empty();
     }
 
+    public Boolean deleteId(Long id) {
+        Optional<Slip> optionalStudent = findById(id);
+        if (optionalStudent.isPresent()) {
+            Slip slip = optionalStudent.get();
 
-    public boolean deleteSlip(Long id) {
-
-        Optional<Slip> optionalSlip = findById(id);
-        if (optionalSlip.isPresent()) {
-
-            Slip slip = optionalSlip.get();
             Transaction transaction = null;
             try (Session session = HibernateUtil.getSessionFactory().openSession()) {
                 transaction = session.beginTransaction();
-                session.delete(slip);
+                session.delete(slip);                                                //(przekazujemy do usunięcia)
                 transaction.commit();
+
                 return true;
             } catch (IllegalStateException | RollbackException ise) {
                 System.err.println("Błąd usuwania rekordu.");
@@ -85,13 +83,9 @@ public class SlipDao {
                 }
             }
         } else {
-            System.err.println("Nie udało się odnaleźć ID");
+            System.err.println("Nie udało się odnaleźć cytatu.");
         }
         return false;
-    }
-
-
-    public void deleteId(int deleteId) {
     }
 }
 

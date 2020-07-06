@@ -54,7 +54,7 @@ public class Menu {
                 }
                 case 3:   {
                     List<Slip> allAdvice = adviceService.getAllAdvice();
-                    System.out.println(Arrays.toString(allAdvice.toArray()));
+                    MenuCase3(allAdvice);
                     break;
                 }
                 case -1:{
@@ -109,5 +109,46 @@ public class Menu {
         }
     }
 
+    private static void MenuCase3(List<Slip> allAdvice) {
+        boolean development = true;
+        while (development) {
+            System.out.println();
+            System.out.println("New Menu");
+            System.out.println("Wybierz jedną z opcji: ");
+            System.out.println("1. Wyświetl ulubione cytaty");
+            System.out.println("2. Usuń cytat z ulubionych");
+            System.out.println("0. Zakończ - Powrót do poprzedniego menu");
+            int nextInt = -1;
+            Scanner scanner = new Scanner(System.in);
+            if (scanner.hasNextInt()) {
+                nextInt = scanner.nextInt();
+            }
+            switch (nextInt) {
+                case 0: {
+                    development = false;
+                    break;
+                }
+                case 1: {
+                    System.out.println();
+                    System.out.println("ulubione cytaty");
+                    System.out.println(Arrays.toString(allAdvice.toArray()));
+                    break;
+                }
+                case 2: {
+                    System.out.println();
+                    System.out.println("usuwanie cytatu - prosze podać ID");
+                    int Id = scanner.nextInt(); //wywołaj metodę usuń w SlipDao z parametrem ID
+                    adviceService.deleteID(Long.valueOf(Id));
+                }
+                case -1: {
+                    System.out.println("Wpisz liczbę");
+                    break;
+                }
+                default: {
+                    System.out.println("Wpisz inny numer.");
+                }
+            }
+        }
+    }
 
 }

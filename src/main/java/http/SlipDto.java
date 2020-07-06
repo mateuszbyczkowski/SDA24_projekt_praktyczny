@@ -1,10 +1,8 @@
 package http;
 
 public class SlipDto {
-
     private long id;
     private String advice;
-
 
     public SlipDto(long id, String advice) {
         this.id = id;
@@ -26,4 +24,6 @@ public class SlipDto {
     public void setAdvice(String advice) {
         this.advice = advice;
     }
+
+
 }

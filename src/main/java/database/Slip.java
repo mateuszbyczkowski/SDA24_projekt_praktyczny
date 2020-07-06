@@ -1,5 +1,6 @@
 package database;
 
+import http.SlipDTo;
 import http.SlipDto;
 
 import javax.persistence.Entity;
@@ -16,7 +17,7 @@ public class Slip {
     private long id;
     private String advice;
 
-    public Slip(){}
+    public Slip(SlipDTo slip){}
     public Slip(SlipDto slipDTo){
         this.id = slipDTo.getId();
         this.advice = slipDTo.getAdvice();

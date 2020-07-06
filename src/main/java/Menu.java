@@ -1,5 +1,5 @@
 import database.Slip;
-import http.SlipDto;
+import http.SlipDTo;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,7 +12,7 @@ public class Menu {
 
 
     public Menu(AdviceService adviceService) {
-        this.adviceService = adviceService;
+        Menu.adviceService = adviceService;
     }
 
     public static void displayMenu(){
@@ -39,7 +39,7 @@ public class Menu {
                     break;
                 }
                 case 1: {
-                    SlipDto randomAdvice = adviceService.getRandomAdvice();
+                    SlipDTo randomAdvice = adviceService.getRandomAdvice();
                     String advice = randomAdvice.getAdvice();
                     System.out.println("******Cytat dla Ciebie******");
                     System.out.println(advice);
@@ -68,7 +68,7 @@ public class Menu {
         }
     }
 
-    private static void MenuCase1(SlipDto randomAdvice) {
+    private static void MenuCase1(SlipDTo randomAdvice) {
         boolean flaga = true;
         while (flaga){
             System.out.println("wbierz jedną z opcji:");

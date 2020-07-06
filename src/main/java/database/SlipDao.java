@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+
 public class SlipDao {
     public void insertOrUpdate(Slip slip) {
         Transaction transaction = null;
@@ -64,14 +65,14 @@ public class SlipDao {
     }
 
     public Boolean deleteId(Long id) {
-        Optional<Slip> optionalStudent = findById(id);
-        if (optionalStudent.isPresent()) {
-            Slip slip = optionalStudent.get();
+        Optional<Slip> optionalSlip = findById(id);
+        if (optionalSlip.isPresent()) {
+            Slip slip = optionalSlip.get();
 
             Transaction transaction = null;
             try (Session session = HibernateUtil.getSessionFactory().openSession()) {
                 transaction = session.beginTransaction();
-                session.delete(slip);                                                //(przekazujemy do usunięcia)
+                session.delete(slip);
                 transaction.commit();
 
                 return true;

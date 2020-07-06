@@ -1,6 +1,7 @@
 import database.Slip;
 import database.SlipDao;
-import http.SlipDTo;
+
+import http.SlipDto;
 import http.SlipResponse;
 import http.HttpClient;
 
@@ -10,11 +11,11 @@ public class AdviceService {
     private  static final String URL = "https://api.adviceslip.com/";
     private final HttpClient httpClient = new HttpClient();
 
-    public SlipDTo getRandomAdvice(){
+    public SlipDto getRandomAdvice(){
         return httpClient.fetch(URL + "advice", SlipResponse.class).getSlip();
     }
 
-    public void saveAdvise(SlipDTo slip){
+    public void saveAdvise(SlipDto slip){
         Slip slipToSave = new Slip(slip);
         SlipDao slipDao = new SlipDao();
         slipDao.insertOrUpdate(slipToSave);

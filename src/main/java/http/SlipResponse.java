@@ -1,19 +1,17 @@
 package http;
 
-import database.Slip;
-
 public class SlipResponse {
-    private SlipDTo slip;
+    private SlipDto slip;
 
-    public SlipResponse(SlipDTo slip) {
+    public SlipResponse(SlipDto slip) {
         this.slip = slip;
     }
 
-    public SlipDTo getSlip() {
+    public SlipDto getSlip() {
         return slip;
     }
 
-    public void setSlip(SlipDTo slip) {
+    public void setSlip(SlipDto slip) {
         this.slip = slip;
     }
 }

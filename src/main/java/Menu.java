@@ -1,24 +1,23 @@
 import database.Slip;
-import http.SlipDTo;
+import database.SlipDao;
+import http.SlipDto;
+import net.bytebuddy.asm.Advice;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-
 public class Menu {
-
     private static AdviceService adviceService;
-
 
     public Menu(AdviceService adviceService) {
         this.adviceService = adviceService;
     }
 
-    public static void displayMenu(){
+    public static void displayMenu() {
         boolean continuing = true;
 
-        while(continuing){
+        while (continuing) {
             System.out.println("Advice Book");
             System.out.println("wbierz jedną z opcji:");
             System.out.println("1) Wylosuj cytat.");
@@ -28,86 +27,89 @@ public class Menu {
 
             int nextInt = -1;
             Scanner scanner = new Scanner(System.in);
-            if(scanner.hasNextInt()){
+            if (scanner.hasNextInt()) {
                 nextInt = scanner.nextInt();
             }
-
-            switch (nextInt){
+            switch (nextInt) {
 
                 case 0: {
                     continuing = false;
                     break;
                 }
                 case 1: {
-                    SlipDTo randomAdvice = adviceService.getRandomAdvice();
+                    SlipDto randomAdvice = adviceService.getRandomAdvice();
                     String advice = randomAdvice.getAdvice();
+                    adviceService.saveAdvise(randomAdvice);
                     System.out.println("******Cytat dla Ciebie******");
                     System.out.println(advice);
                     System.out.println("***********************");
-
-                    MenuCase1(randomAdvice);
                     break;
                 }
                 case 2: {
                     System.out.println("W toku");
                     break;
                 }
-                case 3:   {
+                case 3: {
                     List<Slip> allAdvice = adviceService.getAllAdvice();
+                    System.out.println(Arrays.toString(allAdvice.toArray()));
+                    MenuCase3(allAdvice);
+                    break;
+                }
+            }
+        }
+    }
+
+    private static void MenuCase3(List<Slip> allAdvice) {
+
+        boolean development = true;
+        while (development) {
+            System.out.println();
+            System.out.println("New Menu");
+            System.out.println("Wybierz jedną z opcji: ");
+            System.out.println("1. Wyświetl ulubione cytaty");
+            System.out.println("2. Usuń cytat z ulubionych");
+            System.out.println("0. Zakończ - Powrót do poprzedniego menu");
+            int nextInt = -1;
+            Scanner scanner = new Scanner(System.in);
+            if (scanner.hasNextInt()) {
+                nextInt = scanner.nextInt();
+            }
+
+
+            switch (nextInt) {
+                case 0: {
+                    development = false;
+                    break;
+                }
+                case 1: {
+                    System.out.println();
+                    System.out.println("ulubione cytaty");
                     System.out.println(Arrays.toString(allAdvice.toArray()));
                     break;
                 }
-                case -1:{
-                    System.out.println("Wpisz liczbę");
-                    break;
+                case 2: {
+                    System.out.println();
+                    System.out.println("usuwanie cytatu - prosze podać ID");
+                   long deleteId = scanner.nextInt(); //wywołaj metodę usuń w SlipDao z parametrem ID
+
+                    if (adviceService.deleteID(deleteId)) {
+                        System.out.println("Cytat został usunięty.");
+                    } else {
+                        System.out.println("nie można usunąć cytatu");
+                        break;
+                    }
+
                 }
-                default:{
-                    System.out.println("Wpisz inny numer.");
-                }
+
+            case -1: {
+                System.out.println("Wpisz liczbę");
+                break;
+            }
+            default: {
+                System.out.println("Wpisz inny numer.");
             }
         }
     }
-
-    private static void MenuCase1(SlipDTo randomAdvice) {
-        boolean flaga = true;
-        while (flaga){
-            System.out.println("wbierz jedną z opcji:");
-            System.out.println("1) Losuj następny cytat.");
-            System.out.println("2) Dodaj do ulubionych");
-            System.out.println("3) Cofnij do menu głównego");
-            int nextInt = -1;
-            Scanner scanner = new Scanner(System.in);
-            if(scanner.hasNextInt()){
-                nextInt = scanner.nextInt();
-            }
-            switch (nextInt){
-
-                case 1:{
-                    randomAdvice = adviceService.getRandomAdvice();
-                    String advice = randomAdvice.getAdvice();
-                    System.out.println("******Cytat dla Ciebie******");
-                    System.out.println(advice);
-                    System.out.println("***********************");
-                    break;
-                }
-                case 2:{
-                    adviceService.saveAdvise(randomAdvice);
-                    break;
-                }
-                case 3: {
-                    flaga = false;
-                    break;
-                }
-                case -1:{
-                    System.out.println("Wpisz liczbę");
-                    break;
-                }
-                default:{
-                    System.out.println("Wpisz inny numer.");
-                }
-            }
-        }
-    }
-
-
 }
+}
+

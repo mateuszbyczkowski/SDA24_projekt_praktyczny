@@ -30,7 +30,6 @@ public class SlipDao {
         }
     }
 
-
     public List<Slip> getAll() {
         List<Slip> list = new ArrayList<>();
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -54,14 +53,10 @@ public class SlipDao {
             CriteriaQuery<Slip> query = cb.createQuery(Slip.class);
             Root<Slip> table = query.from(Slip.class);
 
-            // poniżej zapytanie o studenta o id = 1
             query.select(table).where(cb.equal(table.get("id"), id));
+            Slip slip = session.createQuery(query).getSingleResult();
 
-            Slip student = session.createQuery(query).getSingleResult();
-
-            // wynik może być nullem, więc może zostać nie odnaleziony, w tej sytuacji
-            // metoda ofNullable automatycznie zwróci empty
-            return Optional.ofNullable(student);
+            return Optional.ofNullable(slip);
         } catch (PersistenceException he) {
             System.err.println("Listing error.");
             he.printStackTrace();
@@ -70,17 +65,17 @@ public class SlipDao {
     }
 
 
-    public boolean deleteStudent(Long id) {
-        Optional<Slip> optionalStudent = findById(id);
-        if (optionalStudent.isPresent()) {
-            Slip student = optionalStudent.get();
+    public boolean deleteSlip(Long id) {
 
+        Optional<Slip> optionalSlip = findById(id);
+        if (optionalSlip.isPresent()) {
+
+            Slip slip = optionalSlip.get();
             Transaction transaction = null;
             try (Session session = HibernateUtil.getSessionFactory().openSession()) {
                 transaction = session.beginTransaction();
-                session.delete(student);                                                //(przekazujemy do usunięcia)
+                session.delete(slip);
                 transaction.commit();
-
                 return true;
             } catch (IllegalStateException | RollbackException ise) {
                 System.err.println("Błąd usuwania rekordu.");
@@ -90,9 +85,15 @@ public class SlipDao {
                 }
             }
         } else {
-            System.err.println("Nie udało się odnaleźć studenta");
+            System.err.println("Nie udało się odnaleźć ID");
         }
         return false;
     }
 
+
+    public void deleteId(int deleteId) {
+    }
 }
+
+
+

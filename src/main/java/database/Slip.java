@@ -1,7 +1,7 @@
 package database;
 
 import http.SlipDTo;
-import http.SlipDto;
+
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,8 +17,8 @@ public class Slip {
     private long id;
     private String advice;
 
-    public Slip(SlipDTo slip){}
-    public Slip(SlipDto slipDTo){
+
+    public Slip(SlipDTo slipDTo){
         this.id = slipDTo.getId();
         this.advice = slipDTo.getAdvice();
     }
@@ -27,6 +27,7 @@ public class Slip {
         this.id = id;
         this.advice = advice;
     }
+
 
     public long getId() {
         return id;

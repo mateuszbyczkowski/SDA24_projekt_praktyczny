@@ -1,6 +1,7 @@
 import database.Slip;
 import http.SlipDTo;
 
+import javax.persistence.Id;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -111,6 +112,8 @@ public class Menu {
 
     private static void MenuCase3(List<Slip> allAdvice) {
         boolean development = true;
+        Long Id;
+
         while (development) {
             System.out.println();
             System.out.println("New Menu");
@@ -137,8 +140,8 @@ public class Menu {
                 case 2: {
                     System.out.println();
                     System.out.println("usuwanie cytatu - prosze podać ID");
-                    int Id = scanner.nextInt(); //wywołaj metodę usuń w SlipDao z parametrem ID
-                    adviceService.deleteID(Long.valueOf(Id));
+                    Id = scanner.nextLong();
+                    adviceService.deleteID(Id);
                 }
                 case -1: {
                     System.out.println("Wpisz liczbę");

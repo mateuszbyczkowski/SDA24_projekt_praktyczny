@@ -27,9 +27,9 @@ public class AdviceService {
         return slips;
     }
 
-    public void deleteID(Long slipId) {
+    public void deleteID(Long Id) {
         SlipDao slipDao = new SlipDao();
-        System.out.println("Succes: " + slipDao.deleteId(slipId));
+        System.out.println("Succes: " + slipDao.deleteId(Id));
     }
 
 }

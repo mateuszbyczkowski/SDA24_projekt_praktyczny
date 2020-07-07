@@ -53,7 +53,7 @@ public class SlipDao {
             CriteriaBuilder cb = session.getCriteriaBuilder();
             CriteriaQuery<Slip> query = cb.createQuery(Slip.class);
             Root<Slip> table = query.from(Slip.class);
-            query.select(table).where(cb.equal(table.get("id"), id));
+            query.select(table).where(cb.equal(table.get("slipId"), id));
             Slip slip = session.createQuery(query).getSingleResult();
 
             return Optional.ofNullable(slip);

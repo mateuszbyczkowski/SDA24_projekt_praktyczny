@@ -8,13 +8,6 @@ import http.HttpClient;
 import java.util.List;
 
 public class AdviceService {
-    private  static final String URL = "https://api.adviceslip.com/";
-    private final HttpClient httpClient = new HttpClient();
-
-    public SlipDTo getRandomAdvice(){
-        return httpClient.fetch(URL + "advice", SlipResponse.class).getSlip();
-    }
-
     public void saveAdvise(SlipDTo slip){
         Slip slipToSave = new Slip(slip);
         SlipDao slipDao = new SlipDao();

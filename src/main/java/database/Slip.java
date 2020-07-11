@@ -13,6 +13,14 @@ public class Slip {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long slipId;
 
+    public long getSlipId() {
+        return slipId;
+    }
+
+    public void setSlipId(long slipId) {
+        this.slipId = slipId;
+    }
+
     private long id;
     private String advice;
 

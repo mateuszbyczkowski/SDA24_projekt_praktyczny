@@ -1,7 +1,7 @@
 import database.Slip;
+import http.SearchResponse;
 import http.SlipDTo;
 
-import javax.persistence.Id;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -9,14 +9,19 @@ import java.util.Scanner;
 
 public class Menu {
 
-    private static AdviceService adviceService;
+    private final AdviceService adviceService;
+    private final AdviceClient adviceClient;
+    private final AdviceExporter adviceExporter;
+    private final Scanner scanner = new Scanner(System.in);
 
 
-    public Menu(AdviceService adviceService) {
-        Menu.adviceService = adviceService;
+    public Menu(AdviceService adviceService, AdviceClient adviceClient, AdviceExporter adviceExporter) {
+        this.adviceService = adviceService;
+        this.adviceClient = adviceClient;
+        this.adviceExporter = adviceExporter;
     }
 
-    public static void displayMenu(){
+    public  void displayMenu(){
         boolean continuing = true;
 
         while(continuing){
@@ -40,7 +45,7 @@ public class Menu {
                     break;
                 }
                 case 1: {
-                    SlipDTo randomAdvice = adviceService.getRandomAdvice();
+                    SlipDTo randomAdvice = adviceClient.getRandomAdvice();
                     String advice = randomAdvice.getAdvice();
                     System.out.println("******Cytat dla Ciebie******");
                     System.out.println(advice);
@@ -50,7 +55,15 @@ public class Menu {
                     break;
                 }
                 case 2: {
-                    System.out.println("W toku");
+                    System.out.println("Czego szukasz?");
+                    String search = scanner.next();
+
+                    try {
+                        SearchResponse sr = adviceClient.searchByString(search);
+                        System.out.println(sr);
+                    }catch (NumberFormatException e){
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 }
                 case 3:   {
@@ -69,7 +82,7 @@ public class Menu {
         }
     }
 
-    private static void MenuCase1(SlipDTo randomAdvice) {
+    private  void MenuCase1(SlipDTo randomAdvice) {
         boolean flaga = true;
         while (flaga){
             System.out.println("wbierz jedną z opcji:");
@@ -84,7 +97,7 @@ public class Menu {
             switch (nextInt){
 
                 case 1:{
-                    randomAdvice = adviceService.getRandomAdvice();
+                    randomAdvice = adviceClient.getRandomAdvice();
                     String advice = randomAdvice.getAdvice();
                     System.out.println("******Cytat dla Ciebie******");
                     System.out.println(advice);
@@ -110,7 +123,7 @@ public class Menu {
         }
     }
 
-    private static void MenuCase3(List<Slip> allAdvice) {
+    private  void MenuCase3(List<Slip> allAdvice) {
         boolean development = true;
         Long Id;
 
@@ -120,6 +133,7 @@ public class Menu {
             System.out.println("Wybierz jedną z opcji: ");
             System.out.println("1. Wyświetl ulubione cytaty");
             System.out.println("2. Usuń cytat z ulubionych");
+            System.out.println("3. Eksport do pliku ulubionych cytatów");
             System.out.println("0. Zakończ - Powrót do poprzedniego menu");
             int nextInt = -1;
             Scanner scanner = new Scanner(System.in);
@@ -142,6 +156,10 @@ public class Menu {
                     System.out.println("usuwanie cytatu - prosze podać ID");
                     Id = scanner.nextLong();
                     adviceService.deleteID(Id);
+                }
+                case 3:{
+                    adviceExporter.exportToFile(allAdvice);
+                    break;
                 }
                 case -1: {
                     System.out.println("Wpisz liczbę");

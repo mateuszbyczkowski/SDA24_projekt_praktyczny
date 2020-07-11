@@ -25,4 +25,12 @@ public class SlipDTo {
     public void setAdvice(String advice) {
         this.advice = advice;
     }
+
+    @Override
+    public String toString() {
+        return "SlipDTo{" +
+                "id=" + id +
+                ", advice='" + advice + '\'' +
+                '}';
+    }
 }

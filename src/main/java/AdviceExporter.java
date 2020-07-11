@@ -9,15 +9,16 @@ import java.util.List;
 //| slipId = 5 | id = 10 | advice = advice |
 public class AdviceExporter {
 
-    private final String dirPath = "D:\\Kurs SDA\\Projekt praktyczny\\";
-    public void exportToFile(List<Slip> allAdvice){
+    public void exportToFile(List<Slip> allAdvice) {
         try {
+            String dirPath = PropertiesManager.getProperty("dirPath");
+
             PrintWriter zapis = new PrintWriter(dirPath + "cytaty.txt");
-            for (Slip slips: allAdvice) {
-                zapis.println("| slipId = " + slips.getSlipId()+ " | id = " + slips.getId() + " | advice = " + slips.getAdvice());
+            for (Slip slips : allAdvice) {
+                zapis.println("| slipId = " + slips.getSlipId() + " | id = " + slips.getId() + " | advice = " + slips.getAdvice());
             }
             zapis.close();
-        }catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println("Nie znaleziono pliku!");
         }
     }

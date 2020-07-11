@@ -46,7 +46,7 @@ public class SearchResponse {
 
         for (SlipDTo slip: slips) {
             result.append(slip.toString());
-            result.append("\n");
+            result.append('\n');
         }
         return result.toString();
     }

@@ -21,10 +21,10 @@ public class Menu {
         this.adviceExporter = adviceExporter;
     }
 
-    public  void displayMenu(){
+    public void displayMenu() {
         boolean continuing = true;
 
-        while(continuing){
+        while (continuing) {
             System.out.println("Advice Book");
             System.out.println("wbierz jedną z opcji:");
             System.out.println("1) Wylosuj cytat.");
@@ -34,11 +34,11 @@ public class Menu {
 
             int nextInt = -1;
             Scanner scanner = new Scanner(System.in);
-            if(scanner.hasNextInt()){
+            if (scanner.hasNextInt()) {
                 nextInt = scanner.nextInt();
             }
 
-            switch (nextInt){
+            switch (nextInt) {
 
                 case 0: {
                     continuing = false;
@@ -61,42 +61,42 @@ public class Menu {
                     try {
                         SearchResponse sr = adviceClient.searchByString(search);
                         System.out.println(sr);
-                    }catch (NumberFormatException e){
+                    } catch (NumberFormatException e) {
                         System.out.println(e.getMessage());
                     }
                     break;
                 }
-                case 3:   {
+                case 3: {
                     List<Slip> allAdvice = adviceService.getAllAdvice();
                     MenuCase3(allAdvice);
                     break;
                 }
-                case -1:{
+                case -1: {
                     System.out.println("Wpisz liczbę");
                     break;
                 }
-                default:{
+                default: {
                     System.out.println("Wpisz inny numer.");
                 }
             }
         }
     }
 
-    private  void MenuCase1(SlipDTo randomAdvice) {
+    private void MenuCase1(SlipDTo randomAdvice) {
         boolean flaga = true;
-        while (flaga){
+        while (flaga) {
             System.out.println("wbierz jedną z opcji:");
             System.out.println("1) Losuj następny cytat.");
             System.out.println("2) Dodaj do ulubionych");
             System.out.println("3) Cofnij do menu głównego");
             int nextInt = -1;
             Scanner scanner = new Scanner(System.in);
-            if(scanner.hasNextInt()){
+            if (scanner.hasNextInt()) {
                 nextInt = scanner.nextInt();
             }
-            switch (nextInt){
+            switch (nextInt) {
 
-                case 1:{
+                case 1: {
                     randomAdvice = adviceClient.getRandomAdvice();
                     String advice = randomAdvice.getAdvice();
                     System.out.println("******Cytat dla Ciebie******");
@@ -104,7 +104,7 @@ public class Menu {
                     System.out.println("***********************");
                     break;
                 }
-                case 2:{
+                case 2: {
                     adviceService.saveAdvise(randomAdvice);
                     break;
                 }
@@ -112,18 +112,18 @@ public class Menu {
                     flaga = false;
                     break;
                 }
-                case -1:{
+                case -1: {
                     System.out.println("Wpisz liczbę");
                     break;
                 }
-                default:{
+                default: {
                     System.out.println("Wpisz inny numer.");
                 }
             }
         }
     }
 
-    private  void MenuCase3(List<Slip> allAdvice) {
+    private void MenuCase3(List<Slip> allAdvice) {
         boolean development = true;
         Long Id;
 
@@ -157,7 +157,7 @@ public class Menu {
                     Id = scanner.nextLong();
                     adviceService.deleteID(Id);
                 }
-                case 3:{
+                case 3: {
                     adviceExporter.exportToFile(allAdvice);
                     break;
                 }

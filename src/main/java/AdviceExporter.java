@@ -1,6 +1,5 @@
 import database.Slip;
 
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.List;

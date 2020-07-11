@@ -134,6 +134,7 @@ public class Menu {
             System.out.println("1. Wyświetl ulubione cytaty");
             System.out.println("2. Usuń cytat z ulubionych");
             System.out.println("3. Eksport do pliku ulubionych cytatów");
+            System.out.println("4. Eksport do eksela");
             System.out.println("0. Zakończ - Powrót do poprzedniego menu");
             int nextInt = -1;
             Scanner scanner = new Scanner(System.in);
@@ -159,6 +160,10 @@ public class Menu {
                 }
                 case 3: {
                     adviceExporter.exportToFile(allAdvice);
+                    break;
+                }
+                case 4: {
+                    adviceExporter.exportToSheet(allAdvice);
                     break;
                 }
                 case -1: {
